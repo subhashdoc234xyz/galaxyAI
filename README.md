@@ -13,8 +13,49 @@ The Supabase anon key is public by design. Row Level Security policies in the sc
 
 ## Install and develop
 
-```powershell
+### Install the required tools on Windows
+
+Open **Command Prompt** (CMD). The following commands use Windows Package Manager (`winget`):
+
+```cmd
+winget --version
+winget install --id OpenJS.NodeJS.LTS -e --source winget
+winget install --id Git.Git -e --source winget
+winget install --id Google.AndroidStudio -e --source winget
+```
+
+Close and reopen Command Prompt after installation, then check:
+
+```cmd
+node --version
+npm --version
+git --version
+```
+
+Install Android Studio from its [official download page](https://developer.android.com/studio) if `winget` is unavailable. Launch Android Studio and complete its setup wizard; install the Android SDK Platform, Android SDK Build-Tools, and Android SDK Command-line Tools in **More Actions → SDK Manager**. Open **SDK Manager → SDK Tools** to see the installed SDK location. For this project, set `sdk.dir` to that location in `android\local.properties`. A JDK is also required; Android Studio includes a bundled JDK, or install a compatible JDK and configure `JAVA_HOME`.
+
+Download and install the Antigravity desktop app from Google's [official Antigravity download page](https://antigravity.google/download?os=windows). It is an installer download rather than a `winget` command. The Antigravity CLI is optional; if you want it in CMD, the official Windows command is:
+
+```cmd
+curl -fsSL https://antigravity.google/cli/install.cmd -o install.cmd && install.cmd && del install.cmd
+```
+
+### Install this project's JavaScript packages
+
+Open Command Prompt in the project folder (the folder containing `package.json`):
+
+```cmd
+cd /d C:\path\to\galaxyAI
 npm install
+```
+
+`npm install` downloads the packages listed in `package.json`. The main runtime packages are React/React DOM, Vite, Tailwind CSS, React Router, Zustand, Supabase JS, Capacitor Android/App/Browser, secure storage, React Markdown/GFM/highlighting, Lucide icons, and locally bundled Inter fonts. The build tools include Electron, electron-builder, Capacitor CLI, Vitest, Sharp, and PNG-to-ICO.
+
+Install the project packages again after pulling a fresh copy or when `package.json` changes. You do not need to install each JavaScript library globally.
+
+### Start the project
+
+```powershell
 npm run dev            # browser preview at http://localhost:5173
 npm run electron:dev   # Windows desktop development
 ```
