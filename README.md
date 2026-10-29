@@ -23,15 +23,38 @@ In browser development, API secrets use localStorage and are **not encrypted**. 
 
 ## Build
 
+Run these commands from the project root in PowerShell:
+
 ```powershell
-npm run build
-npm run electron:build # release\Galaxy AI Setup.exe and portable executable
-npm run android:debug  # android\app\build\outputs\apk\debug\app-debug.apk
-npm run android:release
-npm run icons
+npm install
+npm run electron:build # Windows installer and portable .exe
+npm run android:debug  # Android debug .apk
 ```
 
-For Android, install Android Studio/Android SDK and configure `android/local.properties` with `sdk.dir`. The recommended build JDK is 17. Release APKs must be signed with your own keystore; never commit keystore files or passwords.
+The outputs are written to `release\Galaxy AI Setup 1.0.0.exe`, `release\Galaxy AI 1.0.0.exe`, and `android\app\build\outputs\apk\debug\app-debug.apk`.
+
+### Build an updated app after editing code
+
+Save your changes, then rerun the build command for the platform you want:
+
+```powershell
+npm run electron:build # rebuilds both Windows .exe files
+npm run android:debug  # rebuilds the Android debug .apk
+```
+
+Both commands rebuild the web app automatically; `android:debug` also syncs the updated web files into the Android project. If you only want to preview edits during development, use `npm run dev` or `npm run electron:dev` instead. If you change `.env`, rebuild the target app too, since the Supabase values are embedded during the build.
+
+To generate the app icons again after changing the artwork, run `npm run icons` before building.
+
+For Android, install Android Studio/Android SDK and configure `android/local.properties` with `sdk.dir`. Use JDK 17 or a compatible installed JDK. To build a release APK, run `npm run android:release`; it must be signed with your own keystore. Never commit keystore files or passwords.
+
+## Download the built apps
+
+These links download the build artifacts currently in this project:
+
+- [Download Android debug APK](android/app/build/outputs/apk/debug/app-debug.apk)
+- [Download Windows installer](release/Galaxy%20AI%20Setup%201.0.0.exe)
+- [Download Windows portable EXE](release/Galaxy%20AI%201.0.0.exe)
 
 ## Features
 
